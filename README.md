@@ -1,11 +1,11 @@
 # Clarity
 
-Public frame. Logo and a YouTube link. Nothing else yet.
+Learn efficient and ethical AI use.  
+Design Intelligent, streamlined workflows.  
+For the good of humanity.  
+No harm. No deception. No surveillance. No junk.  
+Dream your future.
 
-Local preview:
+Coming September 2026.
 
-```bash
-python3 -m http.server 8765
-```
-
-https://github.com/GreenyZA/Clarity (private until launch)
+[YouTube](https://youtu.be/8wqHIp00v-g)
