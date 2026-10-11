@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — Clarity goclarity.co.za</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <span class="logo-mark">CLARITY</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/#learn">Clarity Learn</a></li>
+                    <li><a href="/#ai">Clarity AI</a></li>
+                    <li><a href="/#consult">Clarity Consult</a></li>
+                    <li><a href="/dashboard/" class="btn-nav">Dashboard</a></li>
+                    <li><a href="/#contact" class="btn-nav">Discovery Call</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="padding-top: 48px; padding-bottom: 80px;">
+            <a href="/" style="color: var(--color-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 24px; display: inline-block;">← Back to Clarity</a>
+
+            <div style="max-width: 720px;">
+                <h1>Settings</h1>
+                <p style="color: var(--color-text-dim); margin-bottom: 32px;">Configure how this website is published and maintained. All settings are stored locally in <code>settings.json</code>. No data leaves 192.168.1.10 unless you explicitly publish.</p>
+
+                <div class="settings-panel">
+                    <!-- Publishing -->
+                    <section class="settings-section">
+                        <h2>Publishing</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Publish Target</label>
+                            <select id="publishTarget" class="setting-select">
+                                <option value="local">Local only (192.168.1.10) — current</option>
+                                <option value="github">GitHub Pages</option>
+                                <option value="godaddy">GoDaddy Hosting</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">GitHub Pages Repository (if publishing to GitHub)</label>
+                            <input type="text" id="githubRepo" class="setting-input" placeholder="username/repo-name" disabled>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">GoDaddy / Web Host FTP Credentials (if publishing to GoDaddy)</label>
+                            <div class="setting-grid-2">
+                                <input type="text" id="ftpHost" class="setting-input" placeholder="FTP host" disabled>
+                                <input type="text" id="ftpUser" class="setting-input" placeholder="FTP username" disabled>
+                            </div>
+                            <div class="setting-grid-2" style="margin-top: 8px;">
+                                <input type="password" id="ftpPass" class="setting-input" placeholder="FTP password" disabled>
+                                <input type="text" id="ftpPath" class="setting-input" placeholder="Remote path (e.g. /public_html)" disabled>
+                            </div>
+                            <p class="setting-hint">Credentials are stored only in settings.json on 192.168.1.10. They are never committed to git.</p>
+                        </div>
+                        <div class="setting-row">
+                            <button id="btnPublish" class="btn btn-primary" disabled>Publish Website</button>
+                            <span id="publishStatus" class="setting-status" style="margin-left: 16px;"></span>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Domain & Branding -->
+                    <section class="settings-section">
+                        <h2>Domain &amp; Branding</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Main Domain</label>
+                            <input type="text" id="mainDomain" class="setting-input" value="goclarity.co.za">
+                            <p class="setting-hint">This domain binds all three pillars together.</p>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Logo Text</label>
+                            <input type="text" id="logoText" class="setting-input" value="CLARITY">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Logo Subtext (tagline)</label>
+                            <input type="text" id="logoSub" class="setting-input" value="TRAINING · AI · IT">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Primary Brand Colour (hex)</label>
+                            <div class="setting-grid-2">
+                                <input type="color" id="brandColor1" class="setting-color" value="#6dd5ed">
+                                <input type="color" id="brandColor2" class="setting-color" value="#a78bfa">
+                            </div>
+                            <p class="setting-hint">Accent gradient colours (inspired by ClarityForgeAI YouTube branding).</p>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Contact -->
+                    <section class="settings-section">
+                        <h2>Contact</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Contact Email</label>
+                            <input type="email" id="contactEmail" class="setting-input" value="hello@goclarity.co.za">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">X / Twitter Handle</label>
+                            <input type="text" id="twitterHandle" class="setting-input" value="@SATechExplored">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Location</label>
+                            <input type="text" id="location" class="setting-input" value="South Africa">
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Discovery Call -->
+                    <section class="settings-section">
+                        <h2>Discovery Call</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Discovery Call Duration (minutes)</label>
+                            <input type="number" id="discoveryDuration" class="setting-input" value="15" min="5" max="30">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Cal.diy Scheduling URL</label>
+                            <input type="url" id="caldiyUrl" class="setting-input" placeholder="https://cal.diy.yourdomain.com" value="">
+                            <p class="setting-hint">Leave blank until Cal.diy is deployed. The Discovery Call form will use this URL to create booking links.</p>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Payments & Billing -->
+                    <section class="settings-section">
+                        <h2>Payments &amp; Billing</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">PayFast Merchant ID</label>
+                            <input type="text" id="payfastMerchantId" class="setting-input" placeholder="Your PayFast Merchant ID">
+                            <p class="setting-hint">Stored in settings.json on 192.168.1.10. Never committed to git.</p>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">PayFast Shared Secret</label>
+                            <input type="password" id="payfastSecret" class="setting-input" placeholder="Your PayFast Shared Secret">
+                            <p class="setting-hint">Keep this secret. Stored only on 192.168.1.10.</p>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Invoice Ninja URL (self-hosted)</label>
+                            <input type="url" id="ninjaUrl" class="setting-input" placeholder="https://ninja.yourdomain.com" value="">
+                            <p class="setting-hint">Leave blank until Invoice Ninja is deployed.</p>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Integrations -->
+                    <section class="settings-section">
+                        <h2>Integrations</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Zoom Account (for session delivery)</label>
+                            <input type="text" id="zoomAccount" class="setting-input" placeholder="Your Zoom account email">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Google Drive Backup (optional)</label>
+                            <div class="setting-grid-2">
+                                <input type="text" id="gdriveEmail" class="setting-input" placeholder="Google account email" disabled>
+                                <input type="password" id="gdriveToken" class="setting-input" placeholder="OAuth token (if configured)" disabled>
+                            </div>
+                            <p class="setting-hint">Google Drive sync is configured via the backup system. Enable only with explicit consent and account access.</p>
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">AI Backend (Token Optimiser Tier)</label>
+                            <select id="aiBackend" class="setting-select">
+                                <option value="t1">T1 — Local Ollama (qwen2.5:3b, 192.168.1.10:8081)</option>
+                                <option value="t2">T2 — Free Cloud (OmniRoute + OpenRouter + NVIDIA + NOUS)</option>
+                                <option value="t3">T3 — Paid (Grok via SuperGrok)</option>
+                            </select>
+                            <p class="setting-hint">Controls which AI backend the Clarity Business Manager uses. See the token-optimiser project for details.</p>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- Backup -->
+                    <section class="settings-section">
+                        <h2>Backup Configuration</h2>
+                        <div class="setting-row">
+                            <label class="setting-label">Local Backup Path</label>
+                            <input type="text" id="backupPath" class="setting-input" value="/data/backups">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Backup Retention (local, days)</label>
+                            <input type="number" id="backupRetentionLocal" class="setting-input" value="30" min="1" max="365">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Backup Retention (Google Drive, days)</label>
+                            <input type="number" id="backupRetentionGdrive" class="setting-input" value="365" min="1" max="1825">
+                        </div>
+                        <div class="setting-row">
+                            <label class="setting-label">Backup Encryption Passphrase</label>
+                            <input type="password" id="backupPassphrase" class="setting-input" placeholder="Set a passphrase for backup encryption">
+                            <p class="setting-hint">Encrypts all backup archives. Store this securely. The passphrase itself is stored in settings.json on the local server.</p>
+                        </div>
+                        <div class="setting-row">
+                            <button id="btnTestBackup" class="btn btn-secondary">Test Backup Configuration</button>
+                            <span id="backupTestStatus" class="setting-status" style="margin-left: 16px;"></span>
+                        </div>
+                    </section>
+
+                    <hr class="settings-hr">
+
+                    <!-- About -->
+                    <section class="settings-section">
+                        <h2>About This Settings Page</h2>
+                        <p style="color: var(--color-text-dim); font-size: 0.9rem;">
+                            This page makes it easy to configure the Clarity website for publishing to GitHub Pages or GoDaddy later.
+                            All settings are stored in <code>settings.json</code> on 192.168.1.10.
+                            Nothing is sent to any external service unless you click "Publish Website" or enable Google Drive sync.
+                        </p>
+                        <p style="color: var(--color-text-dim); font-size: 0.85rem; margin-top: 12px; border-top: 1px solid var(--color-border); padding-top: 12px;">
+                            <strong>Privacy note:</strong> This website does not use tracking cookies or third-party analytics. No personal information is collected from visitors unless they submit the Discovery Call form.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">CLARITY</span>
+                <p>goclarity.co.za</p>
+            </div>
+            <div class="footer-links">
+                <a href="/#learn">Clarity Learn</a>
+                <a href="/#ai">Clarity AI</a>
+                <a href="/#consult">Clarity Consult</a>
+                <a href="/#contact">Discovery Call</a>
+                <a href="/dashboard/" class="footer-dashboard-link">&#9670; Dashboard</a>
+            </div>
+            <p class="footer-copy">© <span id="year"></span> Clarity. All rights reserved. South Africa.</p>
+        </div>
+    </footer>
+
+    <script src="js/settings.js"></script>
+</body>
+</html>

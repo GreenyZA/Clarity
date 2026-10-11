@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Policy — Clarity</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <span class="logo-mark">CLARITY</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/#learn">Clarity Learn</a></li>
+                    <li><a href="/#ai">Clarity AI</a></li>
+                    <li><a href="/#consult">Clarity Consult</a></li>
+                    <li><a href="/#contact" class="btn-nav">Discovery Call</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="padding-top: 48px; padding-bottom: 80px;">
+            <a href="/" style="color: var(--color-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 24px; display: inline-block;">← Back to Clarity</a>
+            <article style="max-width: 720px;">
+                <div id="doc-content"></div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">CLARITY</span>
+                <p>goclarity.co.za</p>
+            </div>
+            <div class="footer-links">
+                <a href="/#learn">Clarity Learn</a>
+                <a href="/#ai">Clarity AI</a>
+                <a href="/#consult">Clarity Consult</a>
+                <a href="/#contact">Discovery Call</a>
+            </div>
+            <p class="footer-copy">© <span id="year"></span> Clarity. All rights reserved. South Africa.</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('/legal/refund-policy.md')
+            .then(r => r.text())
+            .then(md => {
+                document.getElementById('doc-content').innerHTML = renderMarkdown(md);
+            })
+            .catch(err => {
+                document.getElementById('doc-content').innerHTML =
+                    '<p style="color: #f87171;">Error loading document.</p>';
+            });
+
+        function renderMarkdown(md) {
+            return md.split('\n\n').map(block => {
+                if (/^---+$/.test(block.trim())) return '<hr>';
+                if (/^## /.test(block)) return `<h2>${escapeHtml(block.replace(/^## /, ''))}</h2>`;
+                if (/^### /.test(block)) return `<h3>${escapeHtml(block.replace(/^### /, ''))}</h3>`;
+                if (/^# /.test(block)) return `<h1>${escapeHtml(block.replace(/^# /, ''))}</h1>`;
+                if (block.includes('|') && block.includes('---')) return renderTable(block);
+                if (/^[-*]\s/.test(block)) {
+                    const items = block.split('\n').filter(line => /^[-*]\s/.test(line));
+                    return `<ul>${items.map(item => `<li>${item.replace(/^[-*]\s+/, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</li>`).join('')}</ul>`;
+                }
+                if (/^\d+\.\s/.test(block)) {
+                    const items = block.split('\n').filter(line => /^\d+\.\s/.test(line));
+                    return `<ol>${items.map(item => `<li>${item.replace(/^\d+\.\s+/, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</li>`).join('')}</ol>`;
+                }
+                let para = block.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+                return `<p>${para}</p>`;
+            }).join('\n');
+        }
+
+        function renderTable(block) {
+            const lines = block.trim().split('\n');
+            const headers = lines[0].split('|').filter(h => h.trim()).map(h => h.trim());
+            let html = '<table>\n<thead>\n<tr>';
+            headers.forEach(h => { html += `<th>${escapeHtml(h)}</th>`; });
+            html += '</tr>\n</thead>\n<tbody>\n';
+            for (let i = 2; i < lines.length; i++) {
+                const cells = lines[i].split('|').filter(c => c.trim());
+                if (cells.length === 0) continue;
+                html += '<tr>';
+                cells.forEach(c => { html += `<td>${escapeHtml(c.trim())}</td>`; });
+                html += '</tr>\n';
+            }
+            html += '</tbody>\n</table>';
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
