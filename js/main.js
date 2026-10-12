@@ -3,6 +3,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ---- Dashboard link visibility (auth-gated) ----
+    fetch('http://192.168.1.10:8083/api/auth/check', { credentials: 'include' })
+        .then((r) => {
+            if (!r.ok) {
+                document.querySelectorAll('a[href="/portal.html"]').forEach((el) => {
+                    el.style.display = 'none';
+                });
+            }
+        })
+        .catch(() => {
+            document.querySelectorAll('a[href="/portal.html"]').forEach((el) => {
+                el.style.display = 'none';
+            });
+        });
+
+
     // ---- Year in footer ----
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -68,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (err) {
                 console.warn('[Clarity] API unavailable, falling back to mailto:', err);
-                const subject = encodeURIComponent('Discovery Call Request — ' + name);
+                const pillarLabel = ({ learn:'Learn', ai:'AI', consult:'Consult', drone:'Drone', 'not-sure':'Unsure' })[pillar] || pillar;
+                const subject = encodeURIComponent('Discovery Call Request [' + pillarLabel + '] — ' + name);
                 const body = encodeURIComponent(
                     'New Discovery Call Request\n\n' +
                     'Name: ' + name + '\n' +
