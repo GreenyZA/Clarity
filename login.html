@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Login — Clarity</title><link rel="stylesheet" href="css/style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body>
+<header class="site-header"><div class="header-inner"><a href="/" class="logo"><span class="logo-mark">CLARITY</span></a></div></header>
+<main><section class="hero"><div class="hero-inner"><div class="hero-text"><h1>Login</h1>
+<p class="hero-sub">Clarity control centre.</p>
+<form id="loginForm" class="contact-form" style="max-width:420px;">
+<div class="form-row"><label>Username</label><input type="text" id="u" required></div>
+<div class="form-row"><label>Password</label><input type="password" id="p" required></div>
+<button class="btn btn-primary" id="b" type="submit">Log in</button>
+<p id="msg" role="status"></p>
+<button type="button" class="btn btn-secondary" id="setup">Create first admin account</button>
+</form></div></div></section></main>
+<script>
+const API='http://192.168.1.10:8083/api/auth';
+async function doAuth(ep){
+  const b=document.getElementById('b'); b.disabled=true;
+  const m=document.getElementById('msg');
+  const payload={username:u.value.trim(),password:p.value};
+  try{
+    const r=await fetch(API+ep,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(payload)});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){ m.textContent=d.detail||'Failed'; return; }
+    m.textContent='Success, redirecting…'; location.href='/portal.html';
+  }catch(e){ m.textContent='Network error'; }
+  finally{ b.disabled=false; }
+}
+document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();doAuth('/login');});
+document.getElementById('setup').addEventListener('click',()=>doAuth('/setup'));
+fetch(API+'/status/').then(r=>r.json()).then(d=>{ if(d.setup_required){ document.getElementById('setup').style.display='block'; }});
+</script>
+</body></html>
