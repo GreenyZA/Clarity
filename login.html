@@ -22,7 +22,7 @@ async function doAuth(ep){
     const r=await fetch(API+ep,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(payload)});
     const d=await r.json().catch(()=>({}));
     if(!r.ok){ m.textContent=d.detail||'Failed'; return; }
-    m.textContent='Success, redirecting…'; location.href='/portal.html';
+    m.textContent='Success, redirecting…'; location.href='http://192.168.1.10:8083/';
   }catch(e){ m.textContent='Network error'; }
   finally{ b.disabled=false; }
 }

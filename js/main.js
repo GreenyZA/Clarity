@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Dashboard link visibility (auth-gated) ----
     fetch('http://192.168.1.10:8083/api/auth/check', { credentials: 'include' })
         .then((r) => {
+            const dashboardLinks = document.querySelectorAll('a[href*="/dashboard/"], a[href*="/portal.html"], .footer-dashboard-link');
             if (!r.ok) {
-                document.querySelectorAll('a[href="/portal.html"]').forEach((el) => {
-                    el.style.display = 'none';
-                });
+                dashboardLinks.forEach((el) => { el.style.display = 'none'; });
+                return;
             }
         })
         .catch(() => {
-            document.querySelectorAll('a[href="/portal.html"]').forEach((el) => {
+            document.querySelectorAll('a[href*="/dashboard/"], a[href*="/portal.html"], .footer-dashboard-link').forEach((el) => {
                 el.style.display = 'none';
             });
         });
