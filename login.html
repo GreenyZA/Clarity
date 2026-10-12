@@ -13,7 +13,10 @@
 <button type="button" class="btn btn-secondary" id="setup">Create first admin account</button>
 </form></div></div></section></main>
 <script>
-const API='http://192.168.1.10:8083/api/auth';
+// Same-origin POST (nginx proxies /api/ to the backend) so the session
+// cookie is stored by the browser. A cross-origin fetch to :8083 has its
+// Set-Cookie silently dropped.
+const API='/api/auth';
 async function doAuth(ep){
   const b=document.getElementById('b'); b.disabled=true;
   const m=document.getElementById('msg');
@@ -22,7 +25,7 @@ async function doAuth(ep){
     const r=await fetch(API+ep,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(payload)});
     const d=await r.json().catch(()=>({}));
     if(!r.ok){ m.textContent=d.detail||'Failed'; return; }
-    m.textContent='Success, redirecting…'; location.href='http://192.168.1.10:8083/';
+    m.textContent='Success, redirecting…'; location.href='http://'+location.hostname+':8083/';
   }catch(e){ m.textContent='Network error'; }
   finally{ b.disabled=false; }
 }
