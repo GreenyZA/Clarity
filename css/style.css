@@ -93,14 +93,14 @@ a:hover {
 
 .logo-mark {
     font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    background: var(--color-surface);
-    padding: 6px 14px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.18em;
+    color: var(--color-text);
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
 }
 
 /* ---------- BUTTONS ---------- */
@@ -120,13 +120,13 @@ a:hover {
 .btn-primary {
     background: var(--color-accent);
     color: var(--color-bg);
-    box-shadow: 0 0 20px rgba(109, 213, 237, 0.3);
+    box-shadow: none;
+    border-radius: 999px;
+    padding: 11px 20px;
 }
 
 .btn-primary:hover {
     background: #8be3f5;
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(109, 213, 237, 0.5);
     color: var(--color-bg);
 }
 
@@ -134,6 +134,8 @@ a:hover {
     background: transparent;
     color: var(--color-accent);
     border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 11px 20px;
 }
 
 .btn-secondary:hover {
@@ -195,7 +197,7 @@ a:hover {
 
 /* ---------- HERO ---------- */
 .hero {
-    padding: 80px 0 60px;
+    padding: 56px 0 36px;
     position: relative;
     overflow: hidden;
 }
@@ -212,6 +214,9 @@ a:hover {
 }
 
 .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     gap: 60px;
@@ -232,15 +237,12 @@ a:hover {
 }
 
 .hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-size: 4.25rem;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
     margin-bottom: 16px;
-    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-text);
 }
 
 .hero-sub {
@@ -272,15 +274,14 @@ a:hover {
 
 .logo-big {
     font-family: var(--font-mono);
-    font-weight: 800;
-    font-size: 2.8rem;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    background: var(--color-surface);
-    padding: 24px 40px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-accent);
-    box-shadow: var(--shadow-glow);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    color: var(--color-text-dim);
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
     display: inline-block;
 }
 
@@ -297,87 +298,122 @@ section {
 }
 
 section h2 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 600;
     margin-bottom: 12px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
 }
 
 section > div > h2 {
     margin-bottom: 32px;
 }
 
-/* ---------- PILLARS ---------- */
+.how-inner,
+.pricing-inner,
+.why-inner,
+.contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- SERVICES ---------- */
 .pillars {
-    background: var(--color-bg-alt);
+    background: transparent;
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: none;
+    padding-top: 28px;
 }
 
 .pillars-inner {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pillars-head {
+    margin-bottom: 8px;
+}
+
+.pillars-head h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0;
 }
 
 .pillar {
-    background: var(--color-surface);
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    background: rgba(26, 30, 46, 0.55);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 32px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    opacity: 1; /* visible by default */
+    border-radius: 18px;
+    padding: 18px 22px;
+    transition: border-color 0.2s, background 0.2s;
 }
 
 .pillar:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-card);
+    border-color: rgba(109, 213, 237, 0.55);
+    background: var(--color-surface);
+    transform: none;
+    box-shadow: none;
 }
 
-.pillar-icon {
-    font-size: 2.4rem;
+.pillar-index {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 16px;
+}
+
+.pillar-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
 }
 
 .pillar h2 {
-    font-size: 1.4rem;
-    margin-bottom: 4px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
 }
 
-.pillar > p {
-    color: var(--color-accent);
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+.pillar-head p {
+    margin: 0;
+    color: var(--color-text-dim);
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
 }
 
 .pillar-list {
     list-style: none;
-    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    margin: 0;
 }
 
 .pillar-list li {
-    padding: 8px 0;
+    padding: 0;
     color: var(--color-text-dim);
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.pillar-list li:last-child {
+    font-size: 0.86rem;
     border-bottom: none;
 }
 
-.pillar-list li::before {
-    content: '›';
-    color: var(--color-accent);
-    margin-right: 8px;
-    font-weight: 700;
+.pillar-list li:not(:last-child)::after {
+    content: '·';
+    margin: 0 10px;
+    color: var(--color-border);
 }
 
 .pillar-cta {
@@ -385,14 +421,18 @@ section > div > h2 {
     align-items: center;
     gap: 8px;
     font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--color-accent);
-    transition: gap 0.2s;
+    font-size: 0.88rem;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: 999px;
+    padding: 10px 16px;
+    white-space: nowrap;
 }
 
 .pillar-cta:hover {
-    gap: 16px;
-    color: var(--color-accent-2);
+    gap: 10px;
+    color: var(--color-bg);
+    background: #8be3f5;
 }
 
 .pillar-cta .arrow {
@@ -400,7 +440,7 @@ section > div > h2 {
 }
 
 .pillar:hover .pillar-cta .arrow {
-    transform: translateX(4px);
+    transform: translateX(3px);
 }
 
 /* ---------- HOW IT WORKS ---------- */
@@ -422,35 +462,37 @@ section > div > h2 {
 
 .steps li {
     counter-increment: step-counter;
-    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(26, 30, 46, 0.55);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 28px;
+    border-radius: 16px;
+    padding: 22px 20px 20px;
     position: relative;
-    transition: all 0.25s;
+    transition: border-color 0.2s;
 }
 
 .steps li:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
+    border-color: rgba(109, 213, 237, 0.55);
+    transform: none;
 }
 
 .steps li::before {
-    content: counter(step-counter);
-    position: absolute;
-    top: -12px;
-    left: -12px;
-    width: 32px;
-    height: 32px;
-    background: var(--color-accent);
-    color: var(--color-bg);
-    font-weight: 700;
-    font-size: 0.9rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 16px rgba(109, 213, 237, 0.4);
+    content: counter(step-counter, decimal-leading-zero);
+    position: static;
+    width: auto;
+    height: auto;
+    margin-bottom: 12px;
+    background: transparent;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    border-radius: 0;
+    display: block;
+    box-shadow: none;
 }
 
 .steps li strong {
@@ -483,22 +525,22 @@ section > div > h2 {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
     margin-bottom: 24px;
 }
 
 .pricing-card {
-    background: var(--color-surface);
+    background: rgba(26, 30, 46, 0.55);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 28px;
-    transition: all 0.3s;
+    border-radius: 16px;
+    padding: 22px 20px;
+    transition: border-color 0.2s;
 }
 
 .pricing-card:hover {
-    border-color: var(--color-accent);
-    box-shadow: var(--shadow-card);
+    border-color: rgba(109, 213, 237, 0.55);
+    box-shadow: none;
 }
 
 .pricing-card h3 {
@@ -901,6 +943,24 @@ section > div > h2 {
         grid-template-columns: 1fr;
     }
 
+    .pillar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .pillar-list {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .pillar-list li:not(:last-child)::after {
+        content: none;
+    }
+
+    .pillar-cta {
+        justify-self: start;
+    }
+
     .steps {
         grid-template-columns: 1fr;
     }
@@ -938,16 +998,5 @@ section > div > h2 {
 .why-list li,
 .contact-box,
 .contact-form {
-    animation: fadeInUp 0.6s ease-out both;
+    animation: none;
 }
-
-.pillar:nth-child(1) { animation-delay: 0.1s; }
-.pillar:nth-child(2) { animation-delay: 0.2s; }
-.pillar:nth-child(3) { animation-delay: 0.3s; }
-.steps li:nth-child(1) { animation-delay: 0.15s; }
-.steps li:nth-child(2) { animation-delay: 0.25s; }
-.steps li:nth-child(3) { animation-delay: 0.35s; }
-.steps li:nth-child(4) { animation-delay: 0.45s; }
-.pricing-card:nth-child(1) { animation-delay: 0.1s; }
-.pricing-card:nth-child(2) { animation-delay: 0.2s; }
-.pricing-card:nth-child(3) { animation-delay: 0.3s; }
